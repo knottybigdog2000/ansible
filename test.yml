@@ -4,9 +4,5 @@
   gather_facts: no
   tasks:
     - name: Get storage information
-      command: powershell.exe -Command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, Used, Free, @{Name='TotalSize';Expression={\$_.Used + \$_.Free}} | Format-Table -AutoSize"
-      register: storage_info
-
-    - name: Print storage information
-      debug:
-        msg: "{{ storage_info.stdout_lines }}"
+      command: powershell.exe -Command "tree"
+     

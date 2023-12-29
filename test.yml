@@ -1,10 +1,10 @@
-
-- name: Check Storage on Windows Host
-  hosts: all
+---
+- name: Check Storage on Windows Host via SSH
+  hosts: windows
   gather_facts: no
   tasks:
     - name: Get storage information
-      win_shell: Get-PSDrive -PSProvider FileSystem | Select-Object Name, Used, Free, @{Name='TotalSize';Expression={$_.Used + $_.Free}} | Format-Table -AutoSize
+      command: powershell.exe -Command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, Used, Free, @{Name='TotalSize';Expression={\$_.Used + \$_.Free}} | Format-Table -AutoSize"
       register: storage_info
 
     - name: Print storage information

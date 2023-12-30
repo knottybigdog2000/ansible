@@ -9,10 +9,11 @@
       args:
       creates: /tmp/df_output.txt
 
-    - name: Read the total storage from the file
-      slurp:
-        src: /tmp/df_output.txt
-        register: df_output_file
+    - name: Run df command and save the output to a file
+      command: df -h > /tmp/df_output.txt
+      args:
+       creates: /tmp/df_output.txt
+
 
     - name: Send ntfy.sh update with total storage
       uri:

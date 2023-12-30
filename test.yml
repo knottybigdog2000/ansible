@@ -6,8 +6,8 @@
   tasks:
 
       - name: Run df command to check storage
-      command: df -h
-      register: df_output
+        command: df -h
+        register: df_output
 
     - name: Display available storage
       debug:

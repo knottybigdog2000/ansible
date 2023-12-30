@@ -31,6 +31,5 @@
         autoclean: yes      # For Ubuntu/Debian
       when: ansible_os_family == 'Debian'
 
-    - name: Clean up package cache
-      shell: yum clean all  # For CentOS/RHEL
-      when: ansible_os_family == 'RedHat'
+    - name: Run apt-get autoclean with sudo
+      command: sudo apt-get autoclean

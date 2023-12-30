@@ -18,3 +18,9 @@
         name: "{{ random_container_name.result }}"
         image: ubuntu:latest
         state: started
+
+    - name: Send ntfy.sh update with total storage
+      uri:
+        url: "https://ntfy.sh/harleyfretwell01"
+        method: POST
+        body: "Docker Container {{random_container_name}} has been spun up!"

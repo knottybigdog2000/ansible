@@ -1,8 +1,24 @@
----
-- name: Check Storage on Windows Host via SSH
-  hosts: windows
-  gather_facts: no
+- name: Update Linux Server
+  hosts: homelab  # Replace with your server group or hostname
+  become: yes              # Run tasks with sudo
+
   tasks:
-    - name: Get storage information
-      command: powershell.exe -Command "tree"
-     
+    - name: Update package cache
+      apt:
+        update_cache: yes   # For Ubuntu/Debian
+      yum:
+        name: '*'
+        state: latest       # For CentOS/RHEL
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist       # For Ubuntu/Debian
+      yum:
+        name: '*'
+        state: latest       # For CentOS/RHEL
+
+    - name: Clean up package cache
+      apt:
+        autoclean: yes      # For Ubuntu/Debian
+      yum:
+        command: clean all  # For CentOS/RHEL

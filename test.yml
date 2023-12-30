@@ -1,7 +1,8 @@
 - name: Update Linux Server
   hosts: 127.0.0.1  # Replace with your server group or hostname
-  become: yes              # Run tasks with sudo
-
+  become: yes  # If you need to escalate privileges with sudo
+  vars:
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
     - name: Update package cache
       apt:

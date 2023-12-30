@@ -1,0 +1,20 @@
+- name: Start an Ubuntu container in Docker with a random name
+  hosts: localhost  # You can specify the target host or hosts here
+  become: yes  # Optionally, if you need to run Docker commands with sudo
+
+  tasks:
+    - name: Generate a random container name
+      community.general.random_string:
+        length: 10  # Adjust the length of the random string as needed
+        chars: 'abcdefghijklmnopqrstuvwxyz0123456789'
+      register: random_container_name
+
+    - name: Pull the Ubuntu image from Docker Hub
+      docker_image:
+        name: ubuntu:latest
+
+    - name: Start the Ubuntu container
+      docker_container:
+        name: "{{ random_container_name.result }}"
+        image: ubuntu:latest
+        state: started

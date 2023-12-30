@@ -16,4 +16,4 @@
       uri:
         url: "https://ntfy.sh/harleyfretwell01"
         method: POST
-        body: "Storage Check Done!"
+        body: "Storage Check Done! Total Storage: {{ df_output.stdout_lines[1].split()[1] }}"

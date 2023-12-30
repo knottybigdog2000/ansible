@@ -10,9 +10,9 @@
 
     - name: Pull the Ubuntu image from Docker Hub
       docker_image:
-       name: ubuntu:latest
-       source: pull
-      become: yes  # Use elevated privileges for this task
+        name: ubuntu:latest
+        source: pull
+      become: yes
 
     - name: Start the Ubuntu container
       docker_container:

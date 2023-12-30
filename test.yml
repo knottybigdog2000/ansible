@@ -1,5 +1,5 @@
 - name: Update Linux Server
-  hosts: 192.168.1.50  # Replace with your server group or hostname
+  hosts: 127.0.0.1  # Replace with your server group or hostname
   become: yes              # Run tasks with sudo
 
   tasks:

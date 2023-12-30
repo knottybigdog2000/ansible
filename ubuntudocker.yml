@@ -4,10 +4,9 @@
 
   tasks:
     - name: Generate a random container name
-      community.general.random_string:
-        length: 10  # Adjust the length of the random string as needed
-        chars: 'abcdefghijklmnopqrstuvwxyz0123456789'
+      command: python -c "import random, string; print(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)))"
       register: random_container_name
+      changed_when: false
 
     - name: Pull the Ubuntu image from Docker Hub
       docker_image:
@@ -15,7 +14,7 @@
 
     - name: Start the Ubuntu container
       docker_container:
-        name: "{{ random_container_name.result }}"
+        name: "{{ random_container_name.stdout }}"
         image: ubuntu:latest
         state: started
 

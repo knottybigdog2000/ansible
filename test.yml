@@ -5,18 +5,18 @@
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
     - name: Run df command and save the output to a file
-      command: df -h > /tmp/df_output.txt
-      args:
-      creates: /tmp/df_output.txt
+        command: df -h > /tmp/df_output.txt
+        args:
+        creates: /tmp/df_output.txt
 
     - name: Run df command and save the output to a file
-      command: df -h > /tmp/df_output.txt
-      args:
-       creates: /tmp/df_output.txt
+        command: df -h > /tmp/df_output.txt
+        args:
+        creates: /tmp/df_output.txt
 
 
     - name: Send ntfy.sh update with total storage
       uri:
-       url: "https://ntfy.sh/harleyfretwell01"
-       method: POST
-       body: "Storage Check Done! Total Storage: {{ df_output_file.content | b64decode }}"
+        url: "https://ntfy.sh/harleyfretwell01"
+        method: POST
+        body: "Storage Check Done! Total Storage: {{ df_output_file.content | b64decode }}"

@@ -5,13 +5,8 @@
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
     - name: Run df command and save the output to a file
-        command: df -h > /tmp/df_output.txt
-        args:
-        creates: /tmp/df_output.txt
-
-    - name: Run df command and save the output to a file
-        command: df -h > /tmp/df_output.txt
-        args:
+      command: df -h > /tmp/df_output.txt
+      args:
         creates: /tmp/df_output.txt
 
 

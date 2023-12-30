@@ -9,8 +9,9 @@
         command: df -h
         register: df_output
 
-    - name: Display available storage
-      debug:
+  
+      - name: Display available storage
+        debug:
         var: df_output.stdout_lines
 
       

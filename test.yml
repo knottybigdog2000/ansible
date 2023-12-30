@@ -4,16 +4,18 @@
   vars:
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
-    - name: Run df command to check storage
-      command: df -h
-      register: df_output
+    - name: Run df command and save the output to a file
+      command: df -h > /tmp/df_output.txt
+      args:
+      creates: /tmp/df_output.txt
 
-    - debug:
-        var: df_output.stdout_lines
+    - name: Read the total storage from the file
+      slurp:
+        src: /tmp/df_output.txt
+        register: df_output_file
 
-
-    - name: Send ntfy.sh update
+    - name: Send ntfy.sh update with total storage
       uri:
-        url: "https://ntfy.sh/harleyfretwell01"
-        method: POST
-        body: "Storage Check Done! Total Storage: {{ df_output_file.content | b64decode }}"
+       url: "https://ntfy.sh/harleyfretwell01"
+       method: POST
+       body: "Storage Check Done! Total Storage: {{ df_output_file.content | b64decode }}"

@@ -4,7 +4,13 @@
   vars:
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
-    - name: update
-      command: sudo apt-get update
+
+      - name: Run df command to check storage
+      command: df -h
+      register: df_output
+
+    - name: Display available storage
+      debug:
+        var: df_output.stdout_lines
 
       

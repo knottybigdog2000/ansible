@@ -4,23 +4,7 @@
   vars:
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
-    - name: Update package cache (Ubuntu/Debian)
-      apt:
-        update_cache: yes
-      when: ansible_os_family == 'Debian'
+    - name: update
+      command: sudo apt-get update
 
-    - name: Update package cache (CentOS/RHEL)
-      command: sudo yum update
-
-    - name: Upgrade all packages (Ubuntu/Debian)
-      apt:
-        upgrade: dist
-      when: ansible_os_family == 'Debian'
-
-    - name: Upgrade all packages (CentOS/RHEL)
-      command: sudo yum upgrade -y
-
-    - name: Clean up package cache (Ubuntu/Debian)
-      apt:
-        autoclean: yes
-      when: ansible_os_family == 'Debian'
+      

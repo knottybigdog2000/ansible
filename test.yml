@@ -6,19 +6,30 @@
     - name: Update package cache
       apt:
         update_cache: yes   # For Ubuntu/Debian
+      when: ansible_os_family == 'Debian'
+
+    - name: Update package cache
       yum:
         name: '*'
         state: latest       # For CentOS/RHEL
+      when: ansible_os_family == 'RedHat'
 
     - name: Upgrade all packages
       apt:
         upgrade: dist       # For Ubuntu/Debian
+      when: ansible_os_family == 'Debian'
+
+    - name: Upgrade all packages
       yum:
         name: '*'
         state: latest       # For CentOS/RHEL
+      when: ansible_os_family == 'RedHat'
 
     - name: Clean up package cache
       apt:
         autoclean: yes      # For Ubuntu/Debian
-      yum:
-        command: clean all  # For CentOS/RHEL
+      when: ansible_os_family == 'Debian'
+
+    - name: Clean up package cache
+      shell: yum clean all  # For CentOS/RHEL
+      when: ansible_os_family == 'RedHat'

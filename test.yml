@@ -13,8 +13,7 @@
 
 
     - name: Send ntfy.sh update
-        uri:
-         url: "https://ntfy.sh/harleyfretwell01"
-         method: POST
-         body: "Storage Check Done!"
-      
+      uri:
+        url: "https://ntfy.sh/harleyfretwell01"
+        method: POST
+        body: "Storage Check Done!"
